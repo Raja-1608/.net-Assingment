@@ -1,0 +1,432 @@
+//program 1
+using System;
+using System.IO;
+using System.Text;
+
+namespace IncludeHelp
+{
+    class numbers
+    {
+        static void Main(string[] args)
+        {
+            int a;
+            int b;
+            int min;
+            int max;
+
+            Console.Write("Enter first number : ");
+            a = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter second number: ");
+            b = Convert.ToInt32(Console.ReadLine());
+
+            if (a > b)
+                max = a;
+            else
+                max = b;
+
+            if (a < b)
+                min = a;
+            else
+                min = b;
+
+            Console.WriteLine("Using if-else...");
+            Console.WriteLine("Minimum number = {0}", min);
+            Console.WriteLine("Maximum number = {0}", max);
+
+            max = (a > b) ? a : b;
+
+            min = (a < b) ? a : b;
+
+            Console.WriteLine("Using Ternary operator...");
+            Console.WriteLine("Minimum number = {0}", min);
+            Console.WriteLine("Maximum number = {0}", max);
+
+            Console.ReadLine();
+        }
+    }
+}
+
+//program 2
+static void Main(string[] args)
+            {
+                int num1, num2, num3;
+                Console.WriteLine("Enter three numbers: \n");
+
+                num1 = Convert.ToInt32(Console.ReadLine());
+                num2 = Convert.ToInt32(Console.ReadLine());
+                num3 = Convert.ToInt32(Console.ReadLine());
+
+                if (num1 >= num2)
+                {
+                    if (num1 >= num3)
+                        Console.WriteLine(num1 + " is the largest number");
+                    else
+                        Console.WriteLine(num3 + " is the largest number");
+                }
+
+                else if (num2 >= num3)
+                    Console.WriteLine(num2 + " is the largest number");
+
+                else
+                    Console.WriteLine(num3 + " is the largest number");
+
+                Console.ReadLine();
+
+
+            }
+//program 3
+ public static void Main()
+        {
+            string str1, str2;
+            int flg = 0;
+            int i = 0, l1, l2, yn = 0;
+
+            Console.Write("\n\nCompare two strings whether they are equal or not :\n");
+            Console.Write("-------------------------------\n");
+            Console.Write("Input the first string : ");
+            str1 = Console.ReadLine();
+
+            Console.Write("Input the second string : ");
+            str2 = Console.ReadLine();
+
+            l1 = str1.Length;
+            l2 = str2.Length;
+            if (l1 == l2)
+            {
+                for (i = 0; i < l1; i++)
+                {
+                    if (str1[i] != str2[i])
+                    {
+                        yn = 1;
+                        i = l1;
+
+                    }
+                }
+            }
+            if (l1 == l2)
+                flg = 0;
+            else if (l1 > l2)
+                flg = 1;
+            else if (l1 < l2)
+                flg = -1;
+            if (flg == 0)
+            {
+                if (yn == 0)
+                    Console.Write("\nThe length of both strings are equal and \nalso, both strings are same.\n\n");
+                else
+                    Console.Write("\nThe length of both strings are equal \nbut they are not same.\n\n");
+            }
+            else if (flg == -1)
+            {
+                Console.Write("\nThe length of the first string is smaller than second.\n\n");
+            }
+            else
+            {
+                Console.Write("\nThe length of the first string is greater than second.\n\n");
+            }
+
+//program 4
+
+static void Main(string[] args)
+            {
+                string str1;
+                string str2;
+
+                Console.Write("Enter first string: ");
+                str1 = Console.ReadLine();
+                Console.Write("Enter second string: ");
+                str2 = Console.ReadLine();
+ 
+                if (str1 == str2)
+                    Console.WriteLine("\"{0}\" and \"{1}\" are equal", str1, str2);
+                else
+                    Console.WriteLine("\"{0}\" and \"{1}\" are not equal", str1, str2);
+
+                Console.ReadLine();
+            }
+        }
+
+//program 5
+ 
+ public static void Main()
+        {
+            int a, b;
+            Console.WriteLine("Enter the Two Numbers : ");
+            a = Convert.ToInt32(Console.ReadLine());
+            b = Convert.ToInt32(Console.ReadLine());
+            if (a > b)
+            {
+                Console.WriteLine("{0} is the Greatest Number", a);
+            }
+            else
+            {
+                Console.WriteLine("{0} is the Greatest Number ", b);
+            }
+            Console.ReadLine();
+        }
+//program 6
+
+class leap
+    {
+        public static void Main()
+        {
+            int chk_year;
+            Console.Write("\n\n");
+            Console.Write("Check whether a given year is leap year or not:\n");
+            Console.Write("----------------------------------");
+            Console.Write("\n\n");
+            Console.Write("enter the input an year : ");
+            chk_year = Convert.ToInt32(Console.ReadLine());
+
+            if ((chk_year % 400) == 0)
+                Console.WriteLine("{0} is a leap year.\n", chk_year);
+            else if ((chk_year % 100) == 0)
+                Console.WriteLine("{0} is not a leap year.\n", chk_year);
+            else if ((chk_year % 4) == 0)
+                Console.WriteLine("{0} is a leap year.\n", chk_year);
+            else
+                Console.WriteLine("{0} is not a leap year.\n", chk_year);
+        }
+
+program 7
+static void Main(string[] args)
+        {
+            int x, y, z;
+            for (x = 1; x <= 5; x++)
+            {
+                for (y = x; y < 5; y++)
+                {
+                    Console.Write(" ");
+                }
+                for (z = 1; z < (x * 2); z++)
+                {
+                    Console.Write("*");
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
+    }
+//program 8
+ public class odd
+    {
+        public static void Main()
+        {
+            int i, n, sum = 0;
+            Console.Write("\n\n");
+            Console.Write("Display the sum of n odd natural number:\n");
+            Console.Write("------------------------------------------");
+            Console.Write("\n\n");
+
+            Console.Write("enter number of terms : ");
+            n = Convert.ToInt32(Console.ReadLine());
+            Console.Write("\nThe odd numbers are :");
+            for (i = 1; i <= n; i++)
+            {
+                Console.Write("{0} ", 2 * i - 1);
+                sum += 2 * i - 1;
+            }
+            Console.Write("\nThe Sum of odd Natural Number upto {0} terms : {1} \n", n, sum);
+        }
+    }
+//program 9
+ public class reverse
+    {
+        public static void Main()
+        {
+            int num, r, sum = 0, t;
+
+            Console.Write("\n\n");
+            Console.Write("Display the number in reverse order:\n");
+            Console.Write("-------------------------------");
+            Console.Write("\n\n");
+
+
+            Console.Write("enter a number: ");
+            num = Convert.ToInt32(Console.ReadLine());
+
+            for (t = num; t != 0; t = t / 10)
+            {
+                r = t % 10;
+                sum = sum * 10 + r;
+            }
+            Console.Write("The number in reverse order is : {0} \n", sum);
+        }
+//program 10
+static void Main(string[] args)
+        {
+            double  m1, m2, m3, total;
+            double per;
+            string nm, div;
+
+            Console.Write("\n\n");
+            Console.Write("Calculate the total, percentage and division to take marks of three subjects:\n");
+            Console.Write("---------------------------------------------");
+            Console.Write("\n\n");
+
+            Console.Write("Enter  the marks of m1 : ");
+            m1 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter  the marks of  m2 : ");
+            m2 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter  the marks of m3 : ");
+            m3 = Convert.ToInt32(Console.ReadLine());
+
+            total = m1 + m2 + m3;
+            per = total / 3.0;
+            if (per >= 60)
+                div = "First";
+            else
+            if (per < 60 && per >= 45)
+                div = "Second";
+            else
+                if (per < 35)
+                div = "Pass";
+            else
+                div = "Fail";
+
+            Console.Write("Marks in m1 : {0}\nMarks in m2 : {1}\nMarks in m3 : {2}\n", m1, m2, m3);
+            Console.Write("Total Marks = {0}\nPercentage = {1}\nDivision = {2}\n", total, per, div);
+        }
+//program 11
+
+public static void Main()
+        {
+            int i, sum = 0;
+
+            Console.Write("\n\n");
+            Console.Write("Find the number and sum of all integer between 100 and 200 \n");
+            Console.Write("-------------------------------------");
+            Console.Write("\n\n");
+
+            Console.Write("Numbers between 100 and 200: \n");
+            for (i = 100; i <= 200; i++)
+            {
+                sum = i + 1;
+                sum= sum + i;
+            }
+            Console.Write("\n\nThe sum : {0} \n", sum);
+        }
+
+//program 12
+ public static void Main()
+        {
+            int i, sum = 0;
+
+            Console.Write("\n\n");
+            Console.Write("Find the number and sum of all integer between 100 and 200, divisible by 9:\n");
+            Console.Write("---------------------------------------------------------");
+            Console.Write("\n\n");
+
+            Console.Write("Numbers between 100 and 200, divisible by 9 : \n");
+            for (i = 101; i < 200; i++)
+            {
+                if (i % 9 == 0)
+                {
+                    Console.Write("{0}  ", i);
+                    sum += i;
+                }
+            }
+            Console.Write("\n\nThe sum : {0} \n", sum);
+        }
+//program 13
+ public static bool isEven(int n)
+        {
+            return (n % 2 == 0);
+        }
+
+        public static void Main()
+        {
+            int n = 134;
+            if (isEven(n) == true)
+                Console.WriteLine("Even");
+            else
+                Console.WriteLine("Odd");
+        }
+//program 14
+
+ public static void Main(String[] args)
+    {
+        int nitem = 5;
+        switch (nitem) {
+  
+        case 1:
+            Console.WriteLine("case 1");
+            break;
+  
+        case 5:
+            Console.WriteLine("case 5");
+            break;
+  
+        case 9:
+            Console.WriteLine("case 9");
+            break;
+  
+        default:
+            Console.WriteLine("No match found");
+            break;
+        }
+
+program 15
+  public class Program
+    {
+        public static void Main(string[] args)
+        {
+           Program program = new Program();
+            program.crossover();
+            program.crossover2();
+        }
+        public void crossover()
+        {
+            int i = 0;
+            int j = 25;
+            for (i = 0; i < j; i++)
+            {
+                j = j - 1;
+                Console.WriteLine("i=" + "" +i.ToString() + " " +"j="+ j.ToString());
+
+            }
+            Console.WriteLine("Crossed Over" + "  " + "i=" + i.ToString() + ">" + "j=" + j.ToString());
+
+        }
+        public void crossover2()
+        {
+
+            int i = 0;
+            int j = 25;
+            for (i = 0; i < j; i++)
+            {
+
+                j = j - 1;
+                 Console.WriteLine("i=" + "" +i.ToString() + " " +"j="+ j.ToString());
+
+            }
+
+            Console.WriteLine("Crossed2 Over" + "  " + "i=" + i.ToString() + ">" + "j=" + j.ToString());
+
+        }
+//program 16
+  public static void Main(string[] args)
+        {
+            int p = 100, cnt = 0;
+            while (cnt < 4)
+            {
+                string s = Console.ReadLine();
+                if (s == "HIT")
+                {
+                    p = p + 10;
+                }
+                else if (s == "MISS")
+                {
+                    p = p - 20;
+                }
+                else
+                {
+                    Console.WriteLine("enter the input");
+                    break;
+                }
+                cnt++;
+            }
+            Console.WriteLine(p);
+            Console.ReadLine();
+        }
+    }
