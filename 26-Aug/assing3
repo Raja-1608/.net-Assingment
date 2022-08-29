@@ -1,0 +1,78 @@
+//program
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _2Aug_26
+{
+    public class Products
+    {
+        private int _id;
+
+        public int Pid
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+        private string _pname;
+
+        public string Pname
+        {
+            get { return _pname; }
+            set { _pname = value; }
+        }
+        private int _price;
+
+        public int Price
+        {
+            get { return _price; }
+            set { _price = value; }
+        }
+
+    }
+}
+//class
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Xml.Linq;
+
+namespace lib16
+{
+    public class Class1
+    {
+        public static void Main(string[] args)
+        {
+            List<Products> product = new List<Products>();
+            product.Add(new Products { Pid = 1, Pname = "Watch", Price = 1000 });
+            product.Add(new Products { Pid = 2, Pname = "Phone", Price = 10000 });
+            product.Add(new Products { Pid = 3, Pname = "Pen", Price = 20 });
+
+            Console.WriteLine("Product Details\n");
+            foreach (var item in product)
+            {
+                Console.WriteLine("Product ID: " + item.Pid);
+                Console.WriteLine("Product Name: " + item.Pname);
+                Console.WriteLine("Product Price: " + item.Price);
+                Console.WriteLine("\t");
+            }
+
+            product.RemoveAt(1);
+            Console.WriteLine("After Removal\n");
+            foreach (var item1 in product)
+            {
+                Console.WriteLine("Product ID: " + item1.Pid);
+                Console.WriteLine("Product Name: " + item1.Pname);
+                Console.WriteLine("Product Price: " + item1.Price);
+                Console.WriteLine("\t");
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+    
+
