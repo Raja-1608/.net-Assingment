@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace File_handling
+{
+    public class program4
+    {
+        public static void Main()
+        {
+            DriveInfo[] drivelist = DriveInfo.GetDrives();
+            foreach (DriveInfo d in drivelist)
+            {
+                Console.WriteLine("Drive {0}", d.Name);
+            }
+        }
+    }
+}
