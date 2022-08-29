@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace File_handling
+{
+
+        public class Program2
+        {
+            static void Main(string[] args)
+            {
+
+
+                string p1 = @"C:\Users\rajas\source\repos\";
+                Console.WriteLine("Enter the file name to be created: ");
+                string f1 = Console.ReadLine();
+                f1 = String.Concat(p1, f1);
+                //File.Create(f1);
+                //Console.WriteLine("file created");
+               //string s = "hi";
+                //File.WriteAllText(f1, s);
+                //Console.WriteLine("---file copy---");
+                //File.Copy(f1, "raja.txt");
+                //Console.WriteLine("----file moved---");
+               // File.Move(f1, "movedfile.txt");
+               //Console.WriteLine("---file deleted---");
+               //File.Delete(f1);
+               FileInfo fileInfo = new FileInfo(f1);
+                Console.WriteLine(fileInfo.FullName + "  Full Name");
+                Console.WriteLine(fileInfo.DirectoryName + " DirectoryName");
+                Console.WriteLine(fileInfo.CreationTime);
+                Directory.CreateDirectory("MyDir");
+                Console.ReadLine();
+
+            }
+
+        }
+    
+}
