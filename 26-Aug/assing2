@@ -1,0 +1,73 @@
+//class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace stud_lib
+{
+    
+        public struct Student
+        {
+
+            public int Id;
+            public string Name;
+            public int Age;
+
+            public void SetEmployee(int id, string name, int age)
+            {
+                Id = id;
+                Name = name;
+                Age = age;
+            }
+
+            public void DisplayEmployee()
+            {
+                Console.WriteLine("Employee:");
+                Console.WriteLine("\tId    : " + Id);
+                Console.WriteLine("\tName   : " + Name);
+                Console.WriteLine("\tAge   : " + Age);
+                Console.WriteLine("\n");
+            }
+
+
+        }
+    
+}
+//program
+using stud_lib;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using aug_26;
+
+namespace aug_26
+{
+    public class Program
+    {
+    
+        static void Main(string[] args)
+        {
+                // Create array of structure
+                       Student[] stud = { new Student(),
+                       new Student(),
+                       new Student() };
+
+                // Pass the array indexes with values as structures
+                stud[0].SetStudent(1, "raja", 20);
+                stud[1].SetStudent(2, "rajan", 21);
+                stud[2].SetStudent(3, "cholan", 23);
+
+                // Call the display method
+                stud[0].DisplayStudent();
+                stud[1].DisplayStudent();
+                stud[2].DisplayStudent();
+                Console.ReadKey();
+            
+        }
+    }
+}
