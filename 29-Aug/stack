@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 
-namespace Aug29Exercises
+namespace Aug-29
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             Userstack<string> u = new Userstack<string>();
-            u.Push("America");
-            u.Push("Russia");
-            u.Push("India");
+            u.Push("Raja");
+            u.Push("rajan");
+            u.Push("cholan");
             Console.WriteLine("Popped element");
             u.Pop();
             Console.WriteLine("Elements at present");
