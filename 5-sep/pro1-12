@@ -113,6 +113,104 @@ namespace Class_Library
             this.BookName = bname;
 
         }
+        //8,9
+        using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Class_Library
+{
+    public class Book
+    { 
+            
+            public Book(int Bookid)
+            {
+                _bookid = Bookid;
+            }
+
+            private int _bookid;
+
+            public int BookID
+            {
+                get { return _bookid; }
+                set { _bookid = value; }
+            }
+            private string _bname;
+
+            public string BookName
+            {
+                get { return _bname; }
+                set { _bname = value; }
+            }
+
+            private int _price;
+
+            public int Price
+            {
+                get { return _price; }
+                set { _price = value; }
+            }
+
+            private string _author;
+
+            public string Author
+            {
+                get { return _author; }
+                set { _author = value; }
+            }
+
+        //default constructor
+        public Book()
+        {
+            BookName = "Fetch-22";
+        }
+
+        //parameterized constructor
+        public Book(int bookid, string bname, int price)
+        {
+            this.BookID = bookid;
+            this.BookName = bname;
+            this.Price = price;
+            
+
+        }
+        public void InsertBook(int bookid, string bname, int price)
+            {
+                this.BookID = bookid;
+                this.BookName = bname;
+                this.Price = price;
+
+            }
+
+        
+        public void InsertBook(int bookid, string bname, int price, string author)
+        {
+            this.BookID = bookid;
+            this.BookName = bname;
+            this.Price = price;
+            this.Author = author;
+
+        }
+        public void InsertBook(int bookid, string bname)
+        {
+            this.BookID = bookid;
+            this.BookName = bname;
+
+        }
+Public Class Novel:Book
+{
+int NoOfPages;
+Public void Insertbook(int bookid,string bname,int price,int noOfpages)
+{
+            this.BookID = bookid;
+            this.BookName = bname;
+            this.Price = price;
+            this.NoOfPages =noOfpages;
+}
+}
+}
 
     }
 }
@@ -163,4 +261,90 @@ namespace Class_Library
         }
 
     }
+}
+//10-12
+//program.cs
+List<Cart> Booklist = new List<Cart>();
+            Booklist.Add(z);
+            Booklist.Add(x);
+            z.BookLists= Booklist;
+            x.BookLists= Booklist;
+           
+            x.Displayinfo();
+            z.Displayinfo();
+            
+            Console.ReadLine();
+//class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace classLib1
+{
+    public class Cart:Book
+    {
+		private int cid;
+
+		public int CustromerId
+		{
+			get { return cid; }
+			set { cid = value; }
+		}
+		private int bookingid;
+
+		public int BookingId
+		{
+			get { return bookingid; }
+			set { bookingid = value; }
+		}
+		
+
+		
+
+		private List<Cart> booklist;
+
+		public List<Cart> BookLists
+		{
+			get { return booklist; }
+			set { booklist = value; }
+		}
+
+
+
+
+
+
+		public void Addbook(int cid,int bookingid,string bkname,int bkprice)
+		{
+			this.CustromerId = cid;
+			this.BookingId = bookingid;
+			this.BookName = bkname;
+			this.Bookprice = bkprice;
+
+        }
+		static int bookcount=0;
+		public void AddCount()
+		{
+			bookcount += 1;
+			Console.WriteLine("count Added {0}--------------",bookcount);
+		
+		}
+
+		public void Displayinfo()
+		{
+			Console.WriteLine("books in carts........................");
+			Console.WriteLine("details");
+			foreach(var c in BookLists)
+			{
+				Console.WriteLine("custromerid=" + this.CustromerId);
+				Console.WriteLine("bookingid="+ this.BookingId);
+				Console.WriteLine("bookname=" + this.BookName);
+				Console.WriteLine("price="+this.Bookprice);
+				AddCount();
+				Console.ReadLine();
+			}
+		}
+	}
 }
