@@ -1,0 +1,166 @@
+//program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _5_sep
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+             //Category bcat = new BCategory();
+            //Console.WriteLine("Book Category id : {0}, Book Category Name : {1}, BookCategory Description : {2}", bcat.CategoryID, bcat.CategoryName,bcat.Description);
+
+           // Category bcat2 = new Category(1, "Pride and prejudice" ,"Classics type");
+            //Console.WriteLine("Book Category id : {0}, Book Category Name : {1}, BookCategory Description : {2}", bcat2.CategoryID, bcat2.CategoryName, bcat2.Description);
+
+            Book b = new Book();
+            Console.WriteLine("Book  id : {0}, Book Name : {1}, Book Description : {2}", b.BookID, b.BookName, b.Price);
+
+            Book b2 = new Book(2, "Strange Planet", 500);
+            Console.WriteLine("Book  id : {0}, Book Name : {1}, Book Description : {2}", b2.BookID, b2.BookName, b2.Price);
+
+
+
+            Console.ReadKey();
+        }
+    }
+}
+
+//class.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Class_Library
+{
+    public class Book
+    {
+        public Book(int Bookid)
+        {
+            _bookid = Bookid;
+        }
+
+        private int _bookid;
+
+        public int BookID
+        {
+            get { return _bookid; }
+            set { _bookid = value; }
+        }
+        private string _bname;
+
+        public string BookName
+        {
+            get { return _bname; }
+            set { _bname = value; }
+        }
+
+        private int _price;
+
+        public int Price
+        {
+            get { return _price; }
+            set { _price = value; }
+        }
+
+        private string _author;
+
+        public string Author
+        {
+            get { return _author; }
+            set { _author = value; }
+        }
+
+        public Book()
+        {
+            BookName = "Fetch-22";
+        }
+
+        public Book(int bookid, string bname, int price)
+        {
+            this.BookID = bookid;
+            this.BookName = bname;
+            this.Price = price;
+
+
+        }
+        public void InsertBook(int bookid, string bname, int price)
+        {
+            this.BookID = bookid;
+            this.BookName = bname;
+            this.Price = price;
+
+        }
+
+
+        public void InsertBook(int bookid, string bname, int price, string author)
+        {
+            this.BookID = bookid;
+            this.BookName = bname;
+            this.Price = price;
+            this.Author = author;
+
+        }
+        public void InsertBook(int bookid, string bname)
+        {
+            this.BookID = bookid;
+            this.BookName = bname;
+
+        }
+
+    }
+}
+//2nd class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Class_Library
+{
+    public class Category
+    {
+        private int _catid;
+
+        public int CategoryID
+        {
+            get { return _catid; }
+            set { _catid = value; }
+        }
+        private string _catname;
+
+        public string CategoryName
+        {
+            get { return _catname; }
+            set { _catname = value; }
+        }
+
+        private string desc;
+
+        public string Description
+        {
+            get { return desc; }
+            set { desc = value; }
+        }
+        public Category()
+        {
+            CategoryName = "Novel";
+        }
+
+        public Category(int Catid, string CatName, string Desc)
+        {
+            this.CategoryID = Catid;
+            this.CategoryName = CatName;
+            this.Description = Desc;
+
+        }
+
+    }
+}
