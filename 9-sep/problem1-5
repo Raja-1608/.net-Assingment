@@ -1,0 +1,329 @@
+//problem1
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace _9_sep
+{
+    class pro1
+    {
+        public static void M1()
+        {
+            for (int i = 0; i <= 10; i++)
+            {
+                Console.WriteLine("Method 1 =   {0} ", i);
+                if (i == 5)
+                {
+                    Thread.Sleep(5000);
+                }
+            }
+        }
+        public static void M2()
+        {
+            for (int j = 0; j <= 3; j++)
+            {
+                Console.WriteLine("Method 2 =   {0} ", j);
+
+            }
+
+        }
+        public void M3()
+        {
+            Console.WriteLine("Thsi is  m3");
+        }
+
+        static void Main(string[] args)
+        {
+            //M1();
+            //M2();
+            //Thread
+            //ThreadStart
+
+            Thread t1 = new Thread(M1);
+            Thread t2 = new Thread(M2);
+
+
+            t1.Start();
+            t2.Start();
+
+            Console.Read();
+
+        }
+    }
+}
+//problem2&3
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace _9_sep
+{
+    class pro2
+    {
+        static void M1()
+        {
+            Thread.Sleep(3000);
+            Console.WriteLine("Sleep State =" + Thread.CurrentThread.ThreadState);
+
+        }
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace _9_sep
+{
+    class pro1
+    {
+        public static void M1()
+        {
+            for (int i = 0; i <= 10; i++)
+            {
+                Console.WriteLine("Method 1 =   {0} ", i);
+                if (i == 5)
+                {
+                    Thread.Sleep(5000);
+                }
+            }
+        }
+        public static void M2()
+        {
+            for (int j = 0; j <= 3; j++)
+            {
+                Console.WriteLine("Method 2 =   {0} ", j);
+
+            }
+
+        }
+        public void M3()
+        {
+            Console.WriteLine("Thsi is  m3");
+        }
+
+        static void Main(string[] args)
+        {
+            //M1();
+            //M2();
+            //Thread
+            //ThreadStart
+
+            Thread t1 = new Thread(M1);
+            Thread t2 = new Thread(M2);
+
+
+            t1.Start();
+            t2.Start();
+
+            Console.Read();
+
+        }
+    }
+}
+       static void M2()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine("Print  i{0} ", i);
+                Console.WriteLine("Thread name " + Thread.CurrentThread.Name);
+                Console.WriteLine("Sleep State =" + Thread.CurrentThread.ThreadState);
+
+                Thread.Sleep(200);
+            }
+
+        }
+        static void Main(string[] args)
+        {
+            ThreadAliveAndStates();
+
+
+            Thread t1 = new Thread(new ThreadStart(M2));
+            t1.Name = "T1 Thread";
+
+            Thread t2 = new Thread(M2);
+            t2.Name = "T2 Thread";
+            Thread t3 = new Thread(M2);
+            t3.Name = "T3 Thread";
+            t2.Priority = ThreadPriority.Highest;
+            t1.Priority = ThreadPriority.Normal;
+            t3.Priority = ThreadPriority.Lowest;
+            t2.Start();
+            t1.Start();
+            //t1.Join();
+
+            t3.Start();
+            Console.ReadLine();
+        }
+        private static void ThreadAliveAndStates()
+        {
+            Thread t1 = new Thread(M1);
+            Thread t2 = new Thread(M1);
+            Console.WriteLine("----Before Start---- ");
+            Console.WriteLine("Is T1 alive= " + t1.IsAlive);
+            Console.WriteLine("Is T2 alive= " + t2.IsAlive);
+            Console.WriteLine("Thread state T1= " + t1.ThreadState);
+            Console.WriteLine("Thread state T2= " + t2.ThreadState);
+
+            t1.Start();
+            t2.Start();
+            Console.WriteLine("----After Start----");
+            Console.WriteLine("Is T1 alive= " + t1.IsAlive);
+            Console.WriteLine("Is T2 alive= " + t2.IsAlive);
+            Console.WriteLine("Thread state T1= " + t1.ThreadState);
+            Console.WriteLine("Thread state T2= " + t2.ThreadState);
+
+            t1.Abort();
+            t2.Abort();
+            Console.WriteLine("Thread state T1= " + t1.ThreadState);
+            Console.WriteLine("Thread state T2= " + t2.ThreadState);
+        }
+    }
+}
+//problem4(mutex&monitor)
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace _9_sep
+{
+    class mutex
+    {
+        static void Main(string[] args)
+        {   
+            using (Mutex mutex = new Mutex(false, "ThreadingDemo"))
+            if (!mutex.WaitOne(1000, false))
+            {
+              Console.WriteLine("already running....");
+              Console.ReadLine();
+              return;
+
+            }
+            else
+            {
+              Console.WriteLine("dude it's running");
+              Console.ReadLine();
+            }
+        }
+    }
+}
+==========================================================================
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace _9_sep
+{
+    class monitor
+    {
+        static object l1 = new object();
+        static void PrintTable()
+        {
+            Thread.Sleep(800);
+            WriteToFile();
+        }
+        static void WriteToFile()
+        {
+            string threadname = Thread.CurrentThread.Name;
+            Console.WriteLine(threadname);
+            Monitor.Enter(l1);
+            try
+            {
+                using (FileStream fs = new FileStream("tables.txt", FileMode.Append, FileAccess.Write))
+                {
+                    StreamWriter wr = new StreamWriter(fs);
+                    wr.WriteLine(threadname);
+                    wr.Close();
+                    fs.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Monitor.Exit(l1);
+                Console.WriteLine("Releasing the thread " + threadname);
+            }
+        }
+        static void Main(string[] args)
+        {
+
+            for (int i = 0; i < 3; i++)
+            {
+                Thread thread = new Thread(PrintTable);
+                thread.Name = string.Concat("thread ", i);
+                thread.Start();
+
+            }
+            Console.Read();
+
+        }
+    }
+}
+//problem 5
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace _9_sep
+{
+    class pro5
+    {
+        static Mutex mutex = new Mutex();
+
+
+        static Thread[] threads = new Thread[10];
+        static Semaphore sem = new Semaphore(3, 3);
+        static void M1()
+        {
+            Console.WriteLine("{0} is waiting in line...", Thread.CurrentThread.Name);
+            sem.WaitOne();
+            Console.WriteLine("{0} enters the code", Thread.CurrentThread.Name);
+            Thread.Sleep(500);
+            Console.WriteLine("{0} is leaving the code", Thread.CurrentThread.Name);
+
+            Console.WriteLine("mutexisrelased");
+            sem.Release();
+        }
+        static void UseCode()
+        {
+            mutex.WaitOne();  
+            Console.WriteLine("{0} has entered in the code",
+                Thread.CurrentThread.Name);  
+            Thread.Sleep(500);     
+            Console.WriteLine("{0} is leaving the code\r\n",
+                Thread.CurrentThread.Name);
+            mutex.ReleaseMutex();     
+        }
+
+        static void Main(string[] args)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                threads[i] = new Thread(M1);
+                threads[i].Name = "thread_" + i;
+                threads[i].Start();
+            }
+            Console.Read();
+        }
+    }
+}
