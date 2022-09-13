@@ -1,0 +1,199 @@
+//program.cs
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace sep_12
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            string path = @"C:\Users\rajas\source\repos\myprgrm\bin\Debug\myprgrm.dll";
+
+            Assembly asm = Assembly.LoadFrom(path);
+            //  Assembly asm1=Assembly.GetAssembly(typeof(path));
+            Type[] types = asm.GetTypes();
+            foreach (var item in types)
+            {
+                Console.WriteLine("name= " + item.Name);//classname
+                Console.WriteLine("Full Name= " + item.FullName);//(assemblyname/namespacename) . class
+
+                Console.WriteLine("IS Class=" + item.IsClass);
+                Console.WriteLine("IS Absatract=" + item.IsAbstract);
+                Console.WriteLine("Whether public " + item.IsPublic);
+
+
+                Console.WriteLine("-----------------");
+                MethodInfo[] methods = item.GetMethods();
+                foreach (var method in methods)
+                {
+                    // for displaying each method
+                    Console.WriteLine("--> Method : {0}", method.Name);
+
+
+
+                    ParameterInfo[] parameters = method.GetParameters();
+                    foreach (var arg in parameters)
+                    {
+                        Console.WriteLine(" Parameter : {0} Type : {1}",
+                        arg.Name, arg.ParameterType);
+
+
+                    }
+                }
+                Console.WriteLine("-------------------------------------------");
+                Type t = null;
+                t = asm.GetType(item.FullName);
+
+                object obj = Activator.CreateInstance(t);
+
+                int ans = (int)item.InvokeMember("Cube", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, obj, new object[2] { 9, 98 });
+
+                item.InvokeMember("SquareRoot", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, obj, new object[2] { 78.00, 800.00 });
+
+                break;
+
+            }         
+            Console.WriteLine("----------------------");
+            Program.WritedataForEachCode(typeof(Song));
+            Console.Read();
+        }
+        static void WritedataForEachCode(Type t)
+        {
+            Console.WriteLine("Methods " + t.Name);
+
+            System.Attribute[] attrs = System.Attribute.GetCustomAttributes(t);      
+            foreach (System.Attribute attr in attrs)
+            {
+                if (attr is DeveloperAttribute)
+                {
+                    DeveloperAttribute a = (DeveloperAttribute)attr;
+                    Console.WriteLine(a.SongName);
+
+                }
+            }
+            Console.WriteLine("---------------------------------");
+            MemberInfo[] minfo = t.GetMembers();
+
+            foreach (var item in minfo)
+            {
+                System.Attribute[] attrs1 = System.Attribute.GetCustomAttributes(item);
+
+                foreach (System.Attribute attrItem in attrs1)
+                {
+                    if (attrItem is DeveloperAttribute)
+                    {
+                        DeveloperAttribute a = (DeveloperAttribute)attrItem;
+                        System.Console.WriteLine(a.SongName);
+                    }
+                }
+
+            }
+        }
+    }
+}
+//song.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace sep_12
+{
+    [Developer("New Album", SongName = "ponniyin selvan")]
+    public class Song
+    {
+        [Developer("Name of the song", SongName = "ponni nadhi")]
+        public string SongName { get; set; }
+
+        [Developer("Language of the song", Language = "Tamil")]
+        public string Language { get; set; }
+
+        [Developer("Lyrics", Lyrics = "abc")]
+
+        [Developer("Language of the song", Language = "tamil")]
+        public string Lyrics { get; set; }
+
+
+        public Song(string sname, string language, string lyrics)
+        {
+            SongName = sname;
+            Language = language;
+            Lyrics = lyrics;
+        }
+    }
+}
+//attribute.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace sep_12
+{
+    [System.AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
+    sealed class DeveloperAttribute : Attribute
+    {
+
+        public DeveloperAttribute(string songname)
+        {
+
+            this.SongName = songname;
+
+        }
+        public string SongName { get; set; }
+        public string Language { get; set; }
+        public string Lyrics { get; set; }
+    }
+}
+//class1.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace myprgrm
+{
+    public class Class1
+    {
+        public double i { get; set; }
+        public double j { get; set; }
+        public double num1
+        {
+            get { return i; }
+            set { i = value; }
+        }
+        public double num2
+        {
+            get { return j; }
+            set { j = value; }
+        }
+
+        public int Cube(int i, int j)
+        {
+            int p = i * i * i;
+            int q = j * j * j;
+            Console.WriteLine("Cube of 1st number: " + p + "\n" + "Cube of 2nd number: " + q);
+            return 0;
+        }
+        public void SquareRoot(double i, double j)
+        {
+
+            double k = Math.Sqrt(i);
+            double v = Math.Sqrt(j);
+            Console.WriteLine("Square Root of 1st Number {0} = {1}: ", i, k);
+            Console.WriteLine("Square Root of 2nd Number {0} = {1}: ", j, v);
+
+        }
+
+    }
+}
