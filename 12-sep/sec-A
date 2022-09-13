@@ -1,0 +1,68 @@
+//program.cs
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _12_sep
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            string path = @"C:\Users\rajas\source\repos\myprblm\bin\Debug\myprblm.dll";
+            Assembly asm = Assembly.LoadFrom(path);
+
+            Type[] types = asm.GetTypes();
+            Type t = null;
+
+            foreach (var item in types)
+            {
+                t = asm.GetType(item.FullName);
+                object obj = Activator.CreateInstance(t);
+                item.InvokeMember("SqrRt", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, obj, new object[] { 60 });
+                item.InvokeMember("Cube", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, obj, new object[] { 9 });
+
+                break;
+
+            }
+            Console.ReadLine();
+        }
+    }
+}
+//calculator.cs
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace myprblm
+{
+    public class calculator
+    {
+        public double Number { get; set; }
+
+        public void SqrRt(double n)
+        {
+            Number = n;
+            double ans = Math.Sqrt(n);
+            Console.WriteLine("The square root of number is " + ans);
+
+
+        }
+
+        public void Cube(double no)
+        {
+            Number = no;
+            double answer = no * no * no;
+            Console.WriteLine("The cube of number is " + answer);
+        }
+    }    
+}
