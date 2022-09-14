@@ -1,0 +1,316 @@
+//program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Movies;
+namespace _13_sep
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Movie m1 = new Movie();
+            m1.AddMovieDetails("action", "Tamil", "Action", 70);
+            Movie m2 = new Movie();
+            m2.AddMovieDetails("Ponniyin selvam", "Tamil", "Historic", 130);
+            Movie m3 = new Movie();
+            m3.AddMovieDetails("Yaanai", "Tamil", "Action", 110);
+            Movie m4 = new Movie();
+            m4.AddMovieDetails("Vikings", "English", "Series", 600);
+            Movie m5 = new Movie();
+            m5.AddMovieDetails("Troy", "English", "Action", 230);
+            Movie m6 = new Movie();
+            m6.AddMovieDetails("SitaRaman", "Tamil", "Love&Romance", 100);
+            Movie m7 = new Movie();
+            m7.AddMovieDetails("Vikram", "Tamil", "Action", 50);
+            Movie m8 = new Movie();
+            m8.AddMovieDetails("Kaithi", "Tamil", "Action", 120);
+            Movie m9 = new Movie();
+            m9.AddMovieDetails("Master", "Tamil", "Action", 120);
+            Movie m10 = new Movie();
+            m10.AddMovieDetails("Billa", "Tamil", "Action", 120);
+            Movie m11 = new Movie("Eli", "Tamil", "Comedy", 110);
+            User u1 = new User();
+            User u2 = new User();
+            User u3 = new User();
+            User u4 = new User();
+            User u5 = new User();
+            User u6 = new User();
+            User u7 = new User();
+            User u8 = new User();
+            User u9 = new User();
+            User u10 = new User();
+            User u11 = new User();
+            User u12 = new User();
+            User u13 = new User();
+
+            u2.AddUser("Raja", "Rajan", "premium");
+            u3.AddUser("Raja", "Rajan", "premium");
+            u4.AddUser("Raja", "Rajan", "premium");
+            u5.AddUser("Raja", "Rajan", "premium");
+            u6.AddUser("Raja", "Rajan", "premium");
+            u7.AddUser("Raja", "Rajan", "premium");
+            u8.AddUser("Raja", "Rajan", "premium");
+            u9.AddUser("Raja", "Rajan", "premium");
+            u10.AddUser("Raja", "Rajan", "premium");
+            u12.AddUser("Raja", "Rajan", "premium");
+            u13.AddUser("Raja", "Rajan", "premium");
+            u1.BorrowMovie(m1);
+            u2.BorrowMovie(m1);
+            u4.BorrowMovie(m1);
+            Console.WriteLine("Movie 1 Availability " + m1.Availability);
+            u2.RetrunMovie(m1, 4);
+            Console.WriteLine("Movie 1 Availability " + m1.Availability);
+            u3.BorrowMovie(m1);
+            u6.BorrowMovie(m1);
+            u5.BorrowMovie(m1);
+            u7.BorrowMovie(m1);
+            u8.BorrowMovie(m1);
+            u9.BorrowMovie(m1);
+            u10.BorrowMovie(m1);
+            u12.BorrowMovie(m1);
+            u11.BorrowMovie(m1);
+            u13.BorrowMovie(m1);
+            u1.BorrowMovie(m2);
+            u1.RetrunMovie(m2, 5);
+            u1.BorrowMovie(m3);
+            Console.WriteLine("-----------------------------------------------");
+            u1.ShowMyList();
+            Console.WriteLine("---------------------------------------------");
+            u1.SearchByLanguage("Tamil");
+            Console.WriteLine("-----------------------------------------");
+            u1.SearchByGenre("Action");
+
+        }
+
+    }
+}
+//movies.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Movies
+{
+    public class Movie
+    {
+        public static int MoviesCount = 0;
+        public Movie()
+        {
+            this.Availability = 10;
+        }
+        public Movie(string MovieName, string Language, string genre, double Cost)
+        {
+            this.Availability = 10;
+            this.MovieName = MovieName;
+            this.Language = Language;
+            this.genres = genre;
+            this.Cost = Cost;
+            MoviesCount++;
+            MoviesList.Add(this);
+        }
+        public static List<Movie> MoviesList = new List<Movie>();
+        private string _movieName;
+
+        public string MovieName
+        {
+            get { return _movieName; }
+            set { _movieName = value; }
+        }
+
+        private int _availability;
+
+        public int Availability
+        {
+            get { return _availability; }
+            set { _availability = value; }
+        }
+        private string _language;
+
+        public string Language
+        {
+            get { return _language; }
+            set { _language = value; }
+        }
+
+        private string _genres;
+
+        public string genres
+        {
+            get { return _genres; }
+            set { _genres = value; }
+        }
+        private double _cost;
+
+        public double Cost
+        {
+            get { return _cost; }
+            set { _cost = value; }
+        }
+        public void AddMovieDetails(string MovieName, string Language, string genres, double Cost)
+        {
+            this.MovieName = MovieName;
+            this.Language = Language;
+            this.genres = genres;
+            this.Cost = Cost;
+            MoviesList.Add(this);
+            MoviesCount++;
+        }
+        public static void PrintAllMovies()
+        {
+            foreach (var item in MoviesList)
+            {
+                Console.WriteLine(item.MovieName);
+            }
+        }
+    }
+}
+//user.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Movies
+{
+    public class User
+    {
+        public int moviesBorrowed = 0;
+        public enum UserLevel
+        {
+            Sub = 2,
+            Vip = 3,
+            Premium = 5
+        }
+        public List<Movie> BorrowedMovies;
+        public User()
+        {
+            this.userLevel = (int)UserLevel.Sub;
+            BorrowedMovies = new List<Movie>();
+
+        }
+        public User(string UserName, string Password, string UserLevel1)
+        {
+            if (UserLevel1 == "Sub")
+            {
+                this.userLevel = (int)UserLevel.Sub;
+            }
+            if (UserLevel1 == "Vip")
+            {
+                this.userLevel = (int)UserLevel.Vip;
+            }
+            if (UserLevel1 == "Premium")
+            {
+                this.userLevel = (int)UserLevel.Premium;
+            }
+            this.UserName = UserName;
+            this.Password = Password;
+        }
+        private int _UserLevel;
+
+        public int userLevel
+        {
+            get { return _UserLevel; }
+            set { _UserLevel = value; }
+        }
+        private string _UserName;
+
+        public string UserName
+        {
+            get { return _UserName; }
+            set { _UserName = value; }
+        }
+        private string _Password;
+
+        public string Password
+        {
+            get { return _Password; }
+            set { _Password = value; }
+        }
+        public void AddUser(string UserName, string Password, string UserLevel1)
+        {
+            if (UserLevel1 == "Sub")
+            {
+                this.userLevel = (int)UserLevel.Sub;
+            }
+            if (UserLevel1 == "Vip")
+            {
+                this.userLevel = (int)UserLevel.Vip;
+            }
+            if (UserLevel1 == "Premium")
+            {
+                this.userLevel = (int)UserLevel.Premium;
+            }
+            this.UserName = UserName;
+            this.Password = Password;
+        }
+        public void BorrowMovie(Movie m)
+        {
+            if (m.Availability > 0)
+            {
+                if (this.moviesBorrowed <= this.userLevel)
+                {
+                    m.Availability--;
+                    this.moviesBorrowed++;
+                    BorrowedMovies.Add(m);
+                }
+                else
+                {
+                    Console.WriteLine("User Can't Borrow Anymore Movies");
+                }
+            }
+            else
+            {
+                Console.WriteLine("This Movies isn't Availabale");
+            }
+        }
+        public void RetrunMovie(Movie m, int days)
+        {
+            if (this.BorrowedMovies.Contains(m))
+            {
+
+                m.Availability++;
+                this.moviesBorrowed--;
+                BorrowedMovies.Remove(m);
+                double totalCost = days * m.Cost;
+                Console.WriteLine($"You Need to Pay {totalCost}");
+            }
+            else
+            {
+                Console.WriteLine("You didn't Borrow this movie..");
+            }
+        }
+        public void SearchByLanguage(string language)
+        {
+            foreach (var item in Movie.MoviesList)
+            {
+                if (item.Language == language)
+                {
+                    Console.WriteLine($"Movie Name : {item.MovieName}  Language : {item.Language} Genere : {item.genres}");
+                }
+            }
+        }
+        public void SearchByGenre(string genre)
+        {
+            foreach (var item in Movie.MoviesList)
+            {
+                if (item.genres == genre)
+                {
+                    Console.WriteLine($"Movie Name : {item.MovieName}  Language : {item.Language} Genere : {item.genres}");
+                }
+            }
+        }
+        public void ShowMyList()
+        {
+            foreach (var item in this.BorrowedMovies)
+            {
+                Console.WriteLine($"Movie Name : {item.MovieName}  Language : {item.Language} Genere : {item.genres}");
+            }
+        }
+    }
+}
